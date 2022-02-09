@@ -1,0 +1,14 @@
+[package]
+name = "recycle-box"
+version = "0.1.0"
+authors = ["Serge Barral <serge.barral@asynchronics.com>"]
+edition = "2021"
+rust-version = "1.56"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/asynchronics/recycle-box"
+readme = "README.md"
+description = """
+A pointer type for heap-allocated objects which heap storage can be re-used, with Pin support.
+"""
+categories = ["memory-management"]
+keywords = ["box", "reuse", "recycle", "pin", "futures"]
