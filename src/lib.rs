@@ -42,7 +42,8 @@
 //! use std::future::{self, Future};
 //! use recycle_box::{RecycleBox, coerce_box};
 //!
-//! let mut my_box: RecycleBox<dyn Future<Output = i32>> = coerce_box!(RecycleBox::new(future::ready(42)));
+//! let mut my_box: RecycleBox<dyn Future<Output = i32>> =
+//!     coerce_box!(RecycleBox::new(future::ready(42)));
 //! my_box = coerce_box!(RecycleBox::new(future::pending()));
 //! ```
 //!
