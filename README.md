@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-recycle-box = "0.1.0"
+recycle-box = "0.2.0"
 ```
 
 ## Examples
