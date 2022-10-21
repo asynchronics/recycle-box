@@ -184,6 +184,12 @@ impl<T> RecycleBox<T> {
             },
         )
     }
+
+    /// Constructs a new `Pin<RecycleBox<T>>`. If `T` does not implement
+    /// `Unpin`, then `x` will be pinned in memory and unable to be moved.
+    pub fn pin(x: T) -> Pin<RecycleBox<T>> {
+        RecycleBox::into_pin(RecycleBox::new(x))
+    }
 }
 
 impl<T> RecycleBox<T>
@@ -268,6 +274,18 @@ where
     /// ```
     pub fn vacate_pinned(boxed: Pin<RecycleBox<T>>) -> RecycleBox<()> {
         unsafe { Self::vacate(Pin::into_inner_unchecked(boxed)) }
+    }
+
+    /// Converts a `RecycleBox<T>` into a `Pin<RecycleBox<T>>`. If `T` does not
+    /// implement `Unpin`, then `*boxed` will be pinned in memory and unable to
+    /// be moved.
+    ///
+    /// This conversion does not allocate on the heap and happens in place.
+    pub fn into_pin(boxed: Self) -> Pin<Self> {
+        // It is not possible to move or replace the insides of a `Pin<Box<T>>`
+        // when `T: !Unpin`, so it's safe to pin it directly without any
+        // additional requirements.
+        unsafe { Pin::new_unchecked(boxed) }
     }
 
     /// Constructs a box from raw pointers and a layout.
