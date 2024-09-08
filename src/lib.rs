@@ -100,7 +100,7 @@ impl<T> RecycleBox<T> {
         } else {
             0
         };
-        assert!(x_layout.size() <= (std::usize::MAX - x_size_margin));
+        assert!(x_layout.size() <= (usize::MAX - x_size_margin));
 
         let size = max(x_layout.size() + x_size_margin, layout.size());
         let safe_layout = Layout::from_size_align(size, layout.align()).unwrap();
